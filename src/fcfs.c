@@ -8,6 +8,7 @@ typedef struct{  // Criação do processo
     int burst;
 } processo;
 
+
 typedef struct{
     processo itens[100]; // Limite de itens na fila
     int inicio; // posição de quem sai primeiro
