@@ -4,8 +4,7 @@ Este é um projeto da disciplina de **Sistemas Operacionais** do curso de Análi
 
 O grupo é composto por:
 
-*aluno1* </br>
-*aluno2* </br>
-*aluno3* </br>
-*aluno4* </br>
+*Felipe de Souza* </br>
+*Pedro Augusto* </br>
+*Renan* </br>
 
