@@ -4,7 +4,7 @@
 
 typedef struct{  // Criação do processo
     int pid;
-    int tempoxecut;
+    int chegada;
     int burst;
 } processo;
 
@@ -46,16 +46,16 @@ void fcfs (fila *f){        // Função do escalonador
     while (!vazio(f)){
         processo p = despreencher(f);
 
-        if(tempo < p.tempoxecut)
-        tempo = p.tempoxecut;
+        if(tempo < p.chegada)
+        tempo = p.chegada;
         
 
         int inicio = tempo;
         int fim = inicio + p.burst;
-        int espera = inicio - p.tempoxecut;  // quanto tempo o processo ficou aguardando desde sua chegada até o início da execução.
+        int espera = inicio - p.chegada;  // quanto tempo o processo ficou aguardando desde sua chegada até o início da execução.
 
 
-        while (c < p.tempoxecut) {
+        while (c < p.chegada) {
          printf("PID %-4s | Chegada %7s | Burst %5s | Inicio %6s | Fim %3s | Espera %6s | Clock %5d\n", "-", "-", "-", "-", "-", "-", c);
 
         fflush(stdout);
@@ -65,10 +65,10 @@ void fcfs (fila *f){        // Função do escalonador
 
             while(c <= fim){
             if (c == fim){
-                printf("PID %-4d | Chegada %7d | Burst %5d | Inicio %6d | Fim %3d | Espera %6d | Clock %5d\n", p.pid, p.tempoxecut, p.burst, inicio, fim, espera, c);
+                printf("PID %-4d | Chegada %7d | Burst %5d | Inicio %6d | Fim %3d | Espera %6d | Clock %5d\n", p.pid, p.chegada, p.burst, inicio, fim, espera, c);
                 printf("\n");
             }else {
-                printf("PID %-4d | Chegada %7d | Burst %5d | Inicio %6d | Fim %3s | Espera %6d | Clock %5d\n", p.pid, p.tempoxecut, p.burst, inicio, "-", espera, c);
+                printf("PID %-4d | Chegada %7d | Burst %5d | Inicio %6d | Fim %3s | Espera %6d | Clock %5d\n", p.pid, p.chegada, p.burst, inicio, "-", espera, c);
             }
             fflush(stdout);
             sleep(2);
@@ -96,7 +96,7 @@ int main (){
         int numAleatorio = 1000 + (rand() % 9000);      // Define o PID do processo
         v[i].pid = numAleatorio;
         printf("Processo %d - Digite a chegada e burst do processo: ", v[i].pid);
-        scanf("%d %d", &v[i].tempoxecut, &v[i].burst);      // Array que insere os dados no processo
+        scanf("%d %d", &v[i].chegada, &v[i].burst);      // Array que insere os dados no processo
 
     }
 
@@ -110,4 +110,3 @@ int main (){
     return 0;
 
 }
-
