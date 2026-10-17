@@ -39,7 +39,7 @@ processo despreencher (fila *f) {         // Retirar o primeiro anterior pra col
 void fcfs (fila *f){        // Função do escalonador
     int tempo = 0;
     int n = 0;
-    int c = 0;      // Contador dos clocks no sistema no geral
+    int c = 1;      // Contador dos clocks no sistema no geral
 
     printf("\n%-4s | %7s | %5s | %6s | %3s | %6s | %5s\n",
        "PID", "Chegada", "Burst", "Inicio", "Fim", "Espera", "Clock");
@@ -94,7 +94,7 @@ int main (){
     scanf ("%d", &n);
 
     for (int i =0; i < n; i++){
-        int numAleatorio = 1000 + (rand() % 9000);      // Define o PID do processo
+        int numAleatorio = (1000 + i) + (rand() % 9000);      // Define o PID do processo
         v[i].pid = numAleatorio;
         printf("Processo %d - Digite a chegada e burst do processo: ", v[i].pid);
         scanf("%d %d", &v[i].chegada, &v[i].burst);      // Array que insere os dados no processo
