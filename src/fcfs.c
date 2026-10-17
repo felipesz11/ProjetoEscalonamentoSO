@@ -35,6 +35,18 @@ processo despreencher (fila *f) {         // Retirar o primeiro anterior pra col
     return p;
 }
 
+void ordenar_chegada(processo v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (v[j].chegada > v[j + 1].chegada) {
+                processo aux = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = aux;
+            }
+        }
+    }
+}
+
 
 void fcfs (fila *f){        // Função do escalonador
     int tempo = 0;
@@ -56,7 +68,7 @@ void fcfs (fila *f){        // Função do escalonador
         int espera = inicio - p.chegada;  // quanto tempo o processo ficou aguardando desde sua chegada até o início da execução.
 
 
-        while (c < p.chegada) {
+        while (c < inicio) {
          printf("PID %-4s | Chegada %7s | Burst %5s | Inicio %6s | Fim %3s | Espera %6s | Clock %5d\n", "-", "-", "-", "-", "-", "-", c);
 
         fflush(stdout);
@@ -100,6 +112,8 @@ int main (){
         scanf("%d %d", &v[i].chegada, &v[i].burst);      // Array que insere os dados no processo
 
     }
+
+    ordenar_chegada(v, n);
 
     fila f;
     iniciar(&f);
