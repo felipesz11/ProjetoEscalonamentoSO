@@ -50,8 +50,7 @@ void ordenar_chegada(processo v[], int n) {
 
 void fcfs (fila *f){        // Função do escalonador
     int tempo = 0;
-    int n = 0;
-    int c = 1;      // Contador dos clocks no sistema no geral
+    int c = 0;      // Contador dos clocks no sistema no geral
 
     printf("\n%-4s | %7s | %5s | %6s | %3s | %6s | %5s\n",
        "PID", "Chegada", "Burst", "Inicio", "Fim", "Espera", "Clock");
@@ -76,8 +75,8 @@ void fcfs (fila *f){        // Função do escalonador
         c++;
 }
 
-            while(c <= fim){
-            if (c == fim){
+            while(c < fim){
+            if (c == fim - 1){
                 printf("PID %-4d | Chegada %7d | Burst %5d | Inicio %6d | Fim %3d | Espera %6d | Clock %5d\n", p.pid, p.chegada, p.burst, inicio, fim, espera, c);
                 printf("\n");
             }else {
@@ -88,7 +87,6 @@ void fcfs (fila *f){        // Função do escalonador
             c++;
             }
 
-        n++;
         tempo = fim;  // Até clock chegar ao limite da fila
         
 
