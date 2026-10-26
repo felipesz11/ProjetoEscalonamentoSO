@@ -33,7 +33,6 @@ int main(void) {
             return 1;
         }
 
-        /* Coloca o processo no final da fila. */
         fila[fim] = i;
         fim = (fim + 1) % MAX;
         na_fila++;
@@ -43,12 +42,10 @@ int main(void) {
     printf("\nOrdem de execucao:\n");
 
     while (na_fila > 0) {
-        /* Retira o primeiro processo da fila. */
         int processo = fila[inicio];
         inicio = (inicio + 1) % MAX;
         na_fila--;
 
-        /* Decide quanto tempo ele pode executar nesta vez. */
         int fatia;
 
         if (restante[processo] > quantum) {
@@ -66,7 +63,6 @@ int main(void) {
                processo + 1, comeco, tempo, restante[processo]);
 
         if (restante[processo] > 0) {
-            /* volta ao final da fila. */
             fila[fim] = processo;
             fim = (fim + 1) % MAX;
             na_fila++;

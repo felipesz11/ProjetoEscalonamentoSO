@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-typedef struct{  // Criação do processo
+typedef struct{  
     int pid;
     int chegada;
     int burst;
@@ -10,26 +10,26 @@ typedef struct{  // Criação do processo
 
 
 typedef struct{
-    processo itens[100]; // Limite de itens na fila
-    int inicio; // posição de quem sai primeiro
-    int fim;    // posição onde entra o próximo
+    processo itens[100]; 
+    int inicio; 
+    int fim;  
 } fila;
 
-void iniciar(fila *f){   // Iniciar a fila
+void iniciar(fila *f){   
     f->inicio = 0;
     f->fim = 0;
 }
 
 int vazio (fila *f){
-    return f->inicio == f->fim; // Caso o inicio e o fim sejam os mesmos, significa que a fila está vazia
+    return f->inicio == f->fim; 
 }
 
-void preencherprox (fila *f, processo p){       // Preencher a fila
+void preencherprox (fila *f, processo p){      
     f->itens[f->fim] = p;                   
     f->fim++;
 }
 
-processo despreencher (fila *f) {         // Retirar o primeiro anterior pra colocar o posterior desse primeiro conteud,o que sera agora o primeiro
+processo despreencher (fila *f) {         
     processo p = f->itens[f->inicio];
     f->inicio++;
     return p;
@@ -48,9 +48,9 @@ void ordenar_chegada(processo v[], int n) {
 }
 
 
-void fcfs (fila *f){        // Função do escalonador
+void fcfs (fila *f){        
     int tempo = 0;
-    int c = 0;      // Contador dos clocks no sistema no geral
+    int c = 0;     
 
     printf("\n%-4s | %7s | %5s | %6s | %3s | %6s | %5s\n",
        "PID", "Chegada", "Burst", "Inicio", "Fim", "Espera", "Clock");
@@ -64,7 +64,7 @@ void fcfs (fila *f){        // Função do escalonador
 
         int inicio = tempo;
         int fim = inicio + p.burst;
-        int espera = inicio - p.chegada;  // quanto tempo o processo ficou aguardando desde sua chegada até o início da execução.
+        int espera = inicio - p.chegada;
 
 
         while (c < inicio) {
@@ -87,7 +87,7 @@ void fcfs (fila *f){        // Função do escalonador
             c++;
             }
 
-        tempo = fim;  // Até clock chegar ao limite da fila
+        tempo = fim;  
         
 
     }
@@ -104,10 +104,10 @@ int main (){
     scanf ("%d", &n);
 
     for (int i =0; i < n; i++){
-        int numAleatorio = (1000 + i) + (rand() % 9000);      // Define o PID do processo
+        int numAleatorio = (1000 + i) + (rand() % 9000);      
         v[i].pid = numAleatorio;
         printf("Processo %d - Digite a chegada e burst do processo: ", v[i].pid);
-        scanf("%d %d", &v[i].chegada, &v[i].burst);      // Array que insere os dados no processo
+        scanf("%d %d", &v[i].chegada, &v[i].burst);  
 
     }
 
@@ -116,7 +116,7 @@ int main (){
     fila f;
     iniciar(&f);
     for (int i = 0; i < n; i++)
-        preencherprox(&f, v[i]);  // O uso do array que foi feito para colocar o processo na fila
+        preencherprox(&f, v[i]);  
 
     fcfs(&f);
 
